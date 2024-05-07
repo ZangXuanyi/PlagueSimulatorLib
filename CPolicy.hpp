@@ -6,14 +6,26 @@
 
 namespace Ethene
 {
+	std::string ReadAllText(const std::string& path)
+	{
+		std::ifstream file(path);
+		if (file)
+		{
+			std::stringstream buffer;
+			buffer << file.rdbuf();
+			return buffer.str();
+		}
+		else
+		{
+			std::cerr << "Unable to open file" << std::endl;
+			return "";
+		}
+	}
+
 	class CPolicy
 	{
-	private:
-		static int id;
-
 	public:
 		std::string name;
-		bool isTriggered;
 		double changeToLocalInfectivity;
 		double changeToLocalSeverity;
 		double changeToLocalLethality;
@@ -28,28 +40,6 @@ namespace Ethene
 		double cond_worldInfectedRatio;
 		double cond_worldDeadRatio;
 		double cond_worldAttention;
-		static std::vector<CPolicy> policiesAll;
-
-		CPolicy(const std::string& policyName,
-			const double& infectivityChange,
-			const double& severityChange,
-			const double& lethalityChange,
-			const double& corpseTransmissionChange,
-			const double& orderChange,
-			const double& medicalInput,
-			const bool& borderChange)
-		{
-			name = policyName;
-			id++;
-			isTriggered = false;
-			changeToLocalInfectivity = infectivityChange;
-			changeToLocalSeverity = severityChange;
-			changeToLocalLethality = lethalityChange;
-			changeToLocalOrder = orderChange;
-			changeToBorder = borderChange;
-			changeToLocalCorpseTransmission = corpseTransmissionChange;
-			changeToMedicalInput = medicalInput;
-		}
 
 		void Execute(CCountry& country) const
 		{
@@ -58,7 +48,7 @@ namespace Ethene
 			country.changeToLocalLethality += changeToLocalLethality;
 			country.changeToLocalOrder += changeToLocalOrder;
 			country.changeToLocalSeverity += changeToLocalSeverity;
-			country.researchInvestment += changeToMedicalInput;
+			country.changeToResearchInvestment += changeToMedicalInput;
 			country.isBorderOpen = changeToBorder;
 		}
 

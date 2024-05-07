@@ -9,37 +9,47 @@
 #include <cmath>
 #include "PlagueSimulatorLib.h"
 
-// Weighted Average Calculator by KimiChat
-template<typename T>
-T weightedAverage(const std::vector<T>& values, const std::vector<T>& weights) {
-	T sum = 0;
-	T weightSum = 0;
-	if (values.size() != weights.size()) {
-		throw std::invalid_argument("Values and weights must be the same size.");
-	}
-	for (size_t i = 0; i < values.size(); ++i) {
-		sum += values[i] * weights[i];
-		weightSum += weights[i];
-	}
-	if (weightSum == 0) {
-		throw std::runtime_error("Sum of weights cannot be zero.");
-	}
-	return sum / weightSum;
-}
-
-// Random number getter by KimiChat
-template<typename T>
-T GetRandomNumber(const T& lowerLimit, const T& upperLimit)
-{
-	static std::mt19937 gen;
-	std::uniform_real_distribution<T> distribution(lowerLimit, upperLimit);
-	return distribution(gen);
-}
-
 
 
 namespace Ethene
 {
+	// Weighted Average Calculator by KimiChat
+	template<typename T>
+	T weightedAverage(const std::vector<T>& values, const std::vector<T>& weights) {
+		T sum = 0;
+		T weightSum = 0;
+		if (values.size() != weights.size()) {
+			throw std::invalid_argument("Values and weights must be the same size.");
+		}
+		for (size_t i = 0; i < values.size(); ++i) {
+			sum += values[i] * weights[i];
+			weightSum += weights[i];
+		}
+		if (weightSum == 0) {
+			throw std::runtime_error("Sum of weights cannot be zero.");
+		}
+		return sum / weightSum;
+	}
+
+	// Random number getter by KimiChat
+	template<typename T>
+	T GetRandomNumber(const T& lowerLimit, const T& upperLimit)
+	{
+		static std::mt19937 gen;
+		std::uniform_real_distribution<T> distribution(lowerLimit, upperLimit);
+		return distribution(gen);
+	}
+
+	template<typename T>
+	bool IsInset(const std::set<T>& mySet, const T& str)
+	{
+		// 使用 find 方法查找 str 是否存在于 mySet 中
+		auto it = mySet.find(str);
+		if (it != mySet.end())
+			return true;
+		else
+			return false;
+	}
 	class CCountry {
 	private:
 		double originalDensity;
@@ -239,7 +249,7 @@ namespace Ethene
 		// To get the executable policies and execute them
 		void ExecutePolicies(CWorld& world)
 		{
-			for (CPolicy& policy : CPolicy::policiesAll)
+			for (CPolicy& policy : CWorld::policiesAll)
 			{
 				CCountry& instance = GetThis();
 				if (policy.CanExecute(world, instance) == true && !IsInset(policyExecuted, policy.name))
@@ -250,15 +260,9 @@ namespace Ethene
 			}
 		}
 
-		template<typename T>
-		bool IsInset(const std::set<T>& mySet, const T& str)
+		void GetCurrentInvestment()
 		{
-			// 使用 find 方法查找 str 是否存在于 mySet 中
-			auto it = mySet.find(str);
-			if (it != mySet.end())
-				return true;
-			else
-				return false;
+			researchInvestment = researchInvestmentTotal * changeToResearchInvestment;
 		}
 
 	public:
@@ -266,15 +270,16 @@ namespace Ethene
 
 		long originalPopulation;
 		long healthyPopulation;
-		long infectedPopulation;
-		long deadPopulation;
+		long infectedPopulation = 0;
+		long deadPopulation = 0;
 
-		double infectedRatio;
-		double deadRatio;
+		double infectedRatio = 0;
+		double deadRatio = 0;
 
-		double realAreaAttention;
+		double realAreaAttention = 0;
 		double areaOrder = 1;
-		double researchInvestment;
+		double researchInvestment = 0;
+		double researchInvestmentTotal;
 		double areaImportance;
 		bool isWealthy;
 		bool isPoverty;
@@ -284,15 +289,15 @@ namespace Ethene
 		bool isCold;
 		bool isHumid;
 		bool isArid;
-		bool isAware;
 
-		bool isBorderOpen;
+		bool isBorderOpen = true;
 
 		double changeToLocalInfectivity = 0;
 		double changeToLocalSeverity = 0;
 		double changeToLocalLethality = 0;
 		double changeToLocalCorpseTransmission = 0;
 		double changeToLocalOrder = 0;
+		double changeToResearchInvestment = 0;
 
 		std::set<std::string> policyExecuted;
 
