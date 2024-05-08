@@ -127,15 +127,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CCountry.hpp" />
-    <ClInclude Include="CDisease.hpp" />
-    <ClInclude Include="CPolicy.hpp" />
-    <ClInclude Include="CWorld.hpp" />
-    <ClInclude Include="PlagueSimulatorLib.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="API.md" />
     <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlagueSimulatorLib.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CCountry.cpp" />
+    <ClCompile Include="CDisease.cpp" />
+    <ClCompile Include="CPolicy.cpp" />
+    <ClCompile Include="csfunc.cpp" />
+    <ClCompile Include="CWorld.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="source\countryInfo.txt" />
+    <Text Include="source\diseaseInfo.txt" />
+    <Text Include="source\policyInfo.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

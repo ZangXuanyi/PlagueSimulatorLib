@@ -1,163 +1,185 @@
-# Plague Simulator ´úÂë²Î¿¼×ÊÁÏ
-ºó¶Ë×÷Õß£ºÒÒÏ©
+# Plague Simulator ä»£ç å‚è€ƒèµ„æ–™
+åç«¯ä½œè€…ï¼šä¹™çƒ¯
 
-## Ê¹ÓÃËµÃ÷
-Ê×ÏÈ±ØĞëËµÃ÷µÄÒ»µãÊÇ£ºÏÂÁĞËùÓĞÀà¾ùÔÚÃüÃû¿Õ¼ä`Ethene`ÄÚ¡£
-ÇëÊÂÏÈ½øĞĞ`typedef`£¬»òÕßÈ«³ÌÊ¹ÓÃË«Ã°ºÅ¡£
+## ä½¿ç”¨è¯´æ˜
+é¦–å…ˆå¿…é¡»è¯´æ˜çš„ä¸€ç‚¹æ˜¯ï¼šä¸‹åˆ—æ‰€æœ‰ç±»å’Œå®ç”¨æ–¹æ³•å‡åœ¨å‘½åç©ºé—´`Ethene`å†…ã€‚
+è¯·äº‹å…ˆè¿›è¡Œ`typedef`ï¼Œæˆ–è€…å…¨ç¨‹ä½¿ç”¨åŒå†’å·ã€‚æä¸å»ºè®®ä½¿ç”¨ `using namespace Ethene` æˆ–è€…ç±»ä¼¼çš„ä»£ç ï¼Œå› ä¸ºEtheneç±»æ¯•ç«Ÿæ˜¯å°‘æ•°ã€‚
+åŒæ—¶ï¼Œä½ åº”è¯¥å°†ä¸‹åˆ—äº”è¡Œä»£ç æ”¾ç½®åœ¨ä½ ç¼–ç¨‹æ–‡ä»¶mainå‡½æ•°çš„ä¸Šæ–¹ï¼›å¤šæ–‡ä»¶å»ºè®®ä½¿ç”¨ `extern` å…³é”®å­—ï¼Œå¦åˆ™ä½ å°†ä¼šè¢« `LNK2001` åˆ¶è£ã€‚
 
-### ×ÜÀÀ
+*`#region` é¢„ç¼–è¯‘å¤´æ˜¯ä¸€ä¸ªç®€å•çš„æŠ˜å å™¨ï¼Œä½ å½“ç„¶å¯ä»¥ä¸å†™ï¼Œåæ­£ä¹Ÿæ²¡ä»€ä¹ˆå½±å“*
 
-×Ü¹²4¸öÖ÷ÒªµÄºó¶ËÀà£º
-- µØÇøÀà `CCountry`
-- ¼²²¡Àà `CDisease`
-- Õş²ßÀà `CPolicy`
-- ÊÀ½çÀà `CWorld`
+```C++
+#pragma region 
+std::vector<Ethene::CCountry> Ethene::CWorld::countries = {};
+std::vector<Ethene::CPolicy> Ethene::CWorld::policiesAll = {};
+Ethene::CDisease Ethene::CDisease::disease = *new Ethene::CDisease();
+Ethene::CWorld Ethene::CWorld::world = *new Ethene::CWorld();
+#pragma endregion
+```
 
-ÒªÊ¹ÓÃÉÏÊö´úÂë,ĞèÒª±£Ö¤ `CCountry.hpp` µÈ4¸öÎÄ¼ş¶¼ÔÚµÄÇ°ÌáÏÂ£¬
-ÒıÈë `PlagueSimulatorLib.h` Í·ÎÄ¼ş¡£ÒÔÏÂÊÇÒ»¸ö¼«Îª¼òµ¥µÄÊµÀı£º
+### æ€»è§ˆ
+
+æ€»å…±4ä¸ªä¸»è¦çš„åç«¯ç±»ï¼š
+- åœ°åŒºç±» `CCountry`
+- ç–¾ç—…ç±» `CDisease`
+- æ”¿ç­–ç±» `CPolicy`
+- ä¸–ç•Œç±» `CWorld`
+
+è¦ä½¿ç”¨ä¸Šè¿°ä»£ç ,éœ€è¦ä¿è¯ `CCountry.cpp` ç­‰5ä¸ªæ–‡ä»¶éƒ½åœ¨çš„å‰æä¸‹ï¼Œ
+å¼•å…¥ `PlagueSimulatorLib.hpp` å¤´æ–‡ä»¶ã€‚ä»¥ä¸‹æ˜¯ä¸€ä¸ªæä¸ºç®€å•çš„å®ä¾‹ï¼š
 ``` C++
 #pragma once
-#include "PlagueSimulatorLib.h"
+#include "PlagueSimulatorLib.hpp"
 #include <iostream>
 #include <cstdio>
+
+#pragma region 
+std::vector<Ethene::CCountry> Ethene::CWorld::countries = {};
+std::vector<Ethene::CPolicy> Ethene::CWorld::policiesAll = {};
+Ethene::CDisease Ethene::CDisease::disease = *new Ethene::CDisease();
+Ethene::CWorld Ethene::CWorld::world = *new Ethene::CWorld();
+#pragma endregion
 
 int main()
 {
 	Ethene::CWorld world = Ethene::CWorld::GetWorld();
 	world.Initialize();
-	std::cout << world.originalPopulation;
+	std::cout << world.originalPopulation<<std::endl;
 	return 0;
 }
 ```
-ÔÚÉÏÊö´úÂëÖĞ£¬ÎÒÃÇÊµÏÖÁËµ÷È¡Ò»¸ö¡°ÊÀ½ç¡±ĞÍÊµÀı£¬²¢ÇÒÊä³öÊÀ½çÈË¿ÚµÄ×ÜÊı¡£
+åœ¨ä¸Šè¿°ä»£ç ä¸­ï¼Œæˆ‘ä»¬å®ç°äº†è°ƒå–ä¸€ä¸ªâ€œä¸–ç•Œâ€å‹å®ä¾‹ï¼Œå¹¶ä¸”è¾“å‡ºä¸–ç•Œäººå£çš„æ€»æ•°ã€‚
 
-ÒÔÏÂ½«»á·Ö¿é²ûÊÍÉÏÊöµÄÀàµÄÊ¹ÓÃ·½Ê½¡£
+ä»¥ä¸‹å°†ä¼šåˆ†å—é˜é‡Šä¸Šè¿°ç±»çš„ä½¿ç”¨æ–¹å¼ã€‚
+
+*æ³¨æ„ï¼šåœ¨é«˜ç‰ˆæœ¬C++ç¼–è¯‘å™¨ä¸­ï¼Œ`cpp` çš„ `#pragma once` å¯èƒ½ä¼šçˆ†é»„ï¼Œä¸è¿‡åº”è¯¥æ˜¯ä¸ä¼šå½±å“è¿è¡Œã€‚*
 
 #### `class CWorld`
-Õâ¸öÀà±íÊ¾µÄÊÇÊÀ½çÏà¹ØµÄ±äÁ¿ºÍ·½·¨¡£
+è¿™ä¸ªç±»è¡¨ç¤ºçš„æ˜¯ä¸–ç•Œç›¸å…³çš„å˜é‡å’Œæ–¹æ³•ã€‚
 
-Õâ¸öÀà£¬×¢Òâ£¬ÊÇ**µ¥Àı**µÄ¡£¶øÇÒ¶ÔÓ¦µÄÊµÀıÔÚ³ÌĞò¿ªÊ¼Ö´ĞĞµÄÄÇÒ»Ë²¼ä¾ÍÊµÀı»¯ÁË¡£
-Òò´Ë£¬ÎÒÃÇ**±ØĞë**Í¨¹ıÏÂÁĞÓï¾äµ÷ÓÃÕâ¸öÊÀ½çÊµÀı£º`CWorld world = CWorld::GetWorld();`¡£
+è¿™ä¸ªç±»ï¼Œæ³¨æ„ï¼Œæ˜¯**å•ä¾‹**çš„ã€‚è€Œä¸”å¯¹åº”çš„å®ä¾‹åœ¨ç¨‹åºå¼€å§‹æ‰§è¡Œçš„é‚£ä¸€ç¬é—´å°±å®ä¾‹åŒ–äº†ã€‚
+å› æ­¤ï¼Œæˆ‘ä»¬åœ¨åˆå§‹åŒ–è¯¥å®ä¾‹åï¼Œ**å¿…é¡»**ä¸”**å»ºè®®åª**é€šè¿‡ä¸‹åˆ—è¯­å¥è°ƒç”¨è¿™ä¸ªä¸–ç•Œå®ä¾‹ï¼š`CWorld world = CWorld::GetWorld();`ã€‚
 
 
-¸ÃÊµÀıÊÇ¾²Ì¬µÄ¡£ÎÒÃÇÓĞ `CWorld::Initialize()` Õâ¸ö·½·¨£¬Ê¹µÃÊÀ½çÊµÀı±»»Ø¹éµ½×î³õµÄ×´Ì¬¡£
-×¢Òâ£¬Õâ²»ÊÇÒ»¸ö¾²Ì¬µÄº¯Êı¡£ËüÍ¨¹ıÒ»¸ö¼òµ¥µÄ `PlainText`ÎÄµµÊäÈëĞèÒªµÄĞÅÏ¢£¬²¢³õÊ¼»¯Õû¸öÊÀ½ç¡£
+è¯¥å®ä¾‹æ˜¯é™æ€çš„ã€‚æˆ‘ä»¬æœ‰ `CWorld::Initialize()` è¿™ä¸ªæ–¹æ³•ï¼Œä½¿å¾—ä¸–ç•Œå®ä¾‹è¢«å›å½’åˆ°æœ€åˆçš„çŠ¶æ€ã€‚
+æ³¨æ„ï¼Œè¿™ä¸æ˜¯ä¸€ä¸ªé™æ€çš„å‡½æ•°ã€‚å®ƒé€šè¿‡ä¸€ä¸ªç®€å•çš„ `PlainText`æ–‡æ¡£è¾“å…¥éœ€è¦çš„ä¿¡æ¯ï¼Œå¹¶åˆå§‹åŒ–æ•´ä¸ªä¸–ç•Œã€‚
 
-¿ÉÖ±½ÓÊ¹ÓÃµÄ±äÁ¿ºÍ·½·¨¼ûÏÂ£º
+å¯ç›´æ¥ä½¿ç”¨çš„å˜é‡å’Œæ–¹æ³•è§ä¸‹ï¼š
 
-| Ãû³Æ | ËµÃ÷ | 
+| åç§° | è¯´æ˜ | 
 | ---- | ---- |
-| `static CWorld& GetWorld()` | »ñÈ¡µ±Ç°ÊÀ½çµÄÊµÀı |
-| `std::string name` | ÊÀ½çµÄÃû³Æ£¬~~ÀıÈç£ºÌáÍßÌØ´óÂ½~~ |
-| `static std::vector<CCountry> countries` | ÊÀ½çÉÏµÄËùÓĞµØÇø|
-| `static std::vector<CWorld> turns`|Ç°Ğ©ÌìËùÓĞµÄÊÀ½ç *£¨ÈË»°£º´æµµ£©* |
-| `static std::map<CPolicy> policiesAll`|ÊÀ½çËùÓĞ¿ÉÄÜ³öÏÖµÄÕş²ß|
-| `double worldAttention = 0`| µ±Ç°µÄÊÀ½ç¹Ø×¢|
-| `double worldTotalResearch = 0`|ÊÀ½çµ±Ç°µÄ½âÒ©ÑĞ·¢×ÜÁ¿|
-| `double worldKindness = 0.3`|ÊÀ½çµÄ¡°»¥ÖúÏµÊı¡±£¬ÓÃÓÚ¾ö¶¨¸÷¹ú¶ÔÊÀ½çµÄ°ïÖúÓûÍû|
-| `long originalPopulation`|ÊÀ½çµÄ×ÜÈË¿Ú|
-| `long infectedPopulation`|ÊÀ½çµÄ¸ĞÈ¾ÈË¿Ú|
-| `long healthyPopulation`|ÊÀ½çµÄ½¡¿µÈË¿Ú|
-| `long deadPopulation`|ÊÀ½çµÄËÀÍöÈË¿Ú|
-| `double infectedRatio`|ÊÀ½çµÄµ±Ç°¸ĞÈ¾±ÈÀı|
-| `double deadRatio`|ÊÀ½çµÄµ±Ç°ËÀÍö±ÈÀı|
-| `void Initialize()`| ³õÊ¼»¯Õû¸öÊÀ½ç£¬»áÇå¿ÕËùÓĞÊı¾İ£¬È»ºó´Ó¶ÁÈ¡¹ú¼Ò¿ªÊ¼£¬ÖØĞÂÕû¸öÖ´ĞĞÒ»±é|
-| `void Update(const CDisease& disease)` | ¸üĞÂÊÀ½ç£¬»»¾ä»°Ëµ£¬Ç°½øÒ»Ìì |
+| `static CWorld& GetWorld()` | è·å–å½“å‰ä¸–ç•Œçš„å®ä¾‹ |
+| `std::string name` | ä¸–ç•Œçš„åç§°ï¼Œ~~ä¾‹å¦‚ï¼šæç“¦ç‰¹å¤§é™†~~ |
+| `static std::vector<CCountry> countries` | ä¸–ç•Œä¸Šçš„æ‰€æœ‰åœ°åŒº|
+| `static std::map<CPolicy> policiesAll`|ä¸–ç•Œæ‰€æœ‰å¯èƒ½å‡ºç°çš„æ”¿ç­–|
+| `double worldAttention = 0`| å½“å‰çš„ä¸–ç•Œå…³æ³¨|
+| `double worldTotalResearch = 0`|ä¸–ç•Œå½“å‰çš„è§£è¯ç ”å‘æ€»é‡|
+| `double worldKindness = 0.3`|ä¸–ç•Œçš„â€œäº’åŠ©ç³»æ•°â€ï¼Œç”¨äºå†³å®šå„å›½å¯¹ä¸–ç•Œçš„å¸®åŠ©æ¬²æœ›|
+| `long originalPopulation`|ä¸–ç•Œçš„æ€»äººå£|
+| `long infectedPopulation`|ä¸–ç•Œçš„æ„ŸæŸ“äººå£|
+| `long healthyPopulation`|ä¸–ç•Œçš„å¥åº·äººå£|
+| `long deadPopulation`|ä¸–ç•Œçš„æ­»äº¡äººå£|
+| `double infectedRatio`|ä¸–ç•Œçš„å½“å‰æ„ŸæŸ“æ¯”ä¾‹|
+| `double deadRatio`|ä¸–ç•Œçš„å½“å‰æ­»äº¡æ¯”ä¾‹|
+| `void Initialize()`| åˆå§‹åŒ–æ•´ä¸ªä¸–ç•Œï¼Œä¼šæ¸…ç©ºæ‰€æœ‰æ•°æ®ï¼Œç„¶åä»è¯»å–å›½å®¶å¼€å§‹ï¼Œé‡æ–°æ•´ä¸ªæ‰§è¡Œä¸€é|
+| `void Update(const CDisease& disease)` | æ›´æ–°ä¸–ç•Œï¼Œæ¢å¥è¯è¯´ï¼Œå‰è¿›ä¸€å¤© |
 
 #### `class CDisease`
-Õâ¸öÀà±íÊ¾µÄÊÇ¼²²¡Ïà¹ØµÄÊµÀıºÍ·½·¨¡£
-Îª¼ò±ãÆğ¼û£¬¸ÃÀàÊÇ**µ¥Àı**µÄ£¬Ò²¾ÍÊÇËµ£¬ÊÀ½çÉÏÖ»ÓĞÒ»¸öÖ÷Òª¼²²¡¡£
-¶øÇÒ¶ÔÓ¦µÄÊµÀıÔÚ³ÌĞò¿ªÊ¼Ö´ĞĞµÄÄÇÒ»Ë²¼ä¾ÍÊµÀı»¯ÁË¡£
-ÎÒÃÇ**±ØĞë**Í¨¹ıÏÂÁĞÓï¾äµ÷ÓÃ¸Ã¼²²¡ÊµÀı£º`CDisease disease = CDisease::GetDisease();`
+è¿™ä¸ªç±»è¡¨ç¤ºçš„æ˜¯ç–¾ç—…ç›¸å…³çš„å®ä¾‹å’Œæ–¹æ³•ã€‚
+ä¸ºç®€ä¾¿èµ·è§ï¼Œè¯¥ç±»æ˜¯**å•ä¾‹**çš„ï¼Œä¹Ÿå°±æ˜¯è¯´ï¼Œä¸–ç•Œä¸Šåªæœ‰ä¸€ä¸ªä¸»è¦ç–¾ç—…ã€‚
+è€Œä¸”å¯¹åº”çš„å®ä¾‹åœ¨ç¨‹åºå¼€å§‹æ‰§è¡Œçš„é‚£ä¸€ç¬é—´å°±å®ä¾‹åŒ–äº†ã€‚
+æˆ‘ä»¬**å¿…é¡»**é€šè¿‡ä¸‹åˆ—è¯­å¥è°ƒç”¨è¯¥ç–¾ç—…å®ä¾‹ï¼š`CDisease disease = CDisease::GetDisease();`
 
-¿ÉÒÔÖ±½ÓÊ¹ÓÃµÄ±äÁ¿ºÍ·½·¨ÈçÏÂ£º
+å¯ä»¥ç›´æ¥ä½¿ç”¨çš„å˜é‡å’Œæ–¹æ³•å¦‚ä¸‹ï¼š
 
-| Ãû³Æ | ËµÃ÷ |
+| åç§° | è¯´æ˜ |
 | ---- | ---- |
-|`std::string name`|¼²²¡µÄÃû³Æ|
-|`double infectivity`|¹ÌÓĞ´«È¾ĞÔ|
-|`double severity`|¹ÌÓĞÑÏÖØĞÔ|
-|`double lethality`|¹ÌÓĞÖÂÃüĞÔ|
-|`double wealthyResistance`|¸»Ô£¿¹ĞÔ|
-|`double povertyResistance`|Æ¶À§¿¹ĞÔ|
-|`double urbanResistance`|³ÇÊĞ¿¹ĞÔ|
-|`double ruralResistance`|Ïç´å¿¹ĞÔ|
-|`double hotResistance`|Ñ×ÈÈ¿¹ĞÔ|
-|`double coldResistance`|º®Àä¿¹ĞÔ|
-|`double humidResistance`|³±Êª¿¹ĞÔ|
-|`double aridResistance`|¸Éºµ¿¹ĞÔ|
-|`double corpseTransmission`|Ê¬Ìå´«²¥|
-|`double cureRequirement`|ÖÎÓúĞèÇó|
-|`double landTransmission`|¿ç¾³ÄÜÁ¦|
-|`static CDisease& GetDisease()`|»ñÈ¡µ±Ç°¼²²¡µÄÊµÀı|
-|`void Initialize()`|³õÊ¼»¯¼²²¡£¬´ÓÄ³¸ö `PlainText` ¶ÁÈëµÄ|
+|`std::string name`|ç–¾ç—…çš„åç§°|
+|`double infectivity`|å›ºæœ‰ä¼ æŸ“æ€§|
+|`double severity`|å›ºæœ‰ä¸¥é‡æ€§|
+|`double lethality`|å›ºæœ‰è‡´å‘½æ€§|
+|`double wealthyResistance`|å¯Œè£•æŠ—æ€§|
+|`double povertyResistance`|è´«å›°æŠ—æ€§|
+|`double urbanResistance`|åŸå¸‚æŠ—æ€§|
+|`double ruralResistance`|ä¹¡æ‘æŠ—æ€§|
+|`double hotResistance`|ç‚çƒ­æŠ—æ€§|
+|`double coldResistance`|å¯’å†·æŠ—æ€§|
+|`double humidResistance`|æ½®æ¹¿æŠ—æ€§|
+|`double aridResistance`|å¹²æ—±æŠ—æ€§|
+|`double corpseTransmission`|å°¸ä½“ä¼ æ’­|
+|`double cureRequirement`|æ²»æ„ˆéœ€æ±‚|
+|`double landTransmission`|è·¨å¢ƒèƒ½åŠ›|
+|`static CDisease& GetDisease()`|è·å–å½“å‰ç–¾ç—…çš„å®ä¾‹|
+|`void Initialize()`|åˆå§‹åŒ–ç–¾ç—…ï¼Œä»æŸä¸ª `PlainText` è¯»å…¥çš„|
 
 #### `class CPolicy`
-Õâ¸öÀà±íÊ¾µÄÊÇµØÇø²ÉÓÃµÄÏà¹ØÕş²ß¡£
+è¿™ä¸ªç±»è¡¨ç¤ºçš„æ˜¯åœ°åŒºé‡‡ç”¨çš„ç›¸å…³æ”¿ç­–ã€‚
 
-¿ÉÒÔÖ±½Ó·ÃÎÊµÄ±äÁ¿ºÍ·½·¨ÈçÏÂ£º
+å¯ä»¥ç›´æ¥è®¿é—®çš„å˜é‡å’Œæ–¹æ³•å¦‚ä¸‹ï¼š
 
-|Ãû³Æ|ËµÃ÷|
+|åç§°|è¯´æ˜|
 |----|----|
-|`std::string name;`|Õş²ßµÄÃû³Æ|
-|`double changeToLocalInfectivity;`|¶Ô´«È¾²úÉúµÄĞ§¹û|
-|`double changeToLocalSeverity;`|¶ÔÑÏÖØ²úÉúµÄĞ§¹û|
-|`double changeToLocalLethality;`|¶ÔÖÂËÀ²úÉúµÄĞ§¹û|
-|`double changeToLocalCorpseTransmission;`|¶ÔÊ¬Ìå´«²¥²úÉúµÄĞ§¹û|
-|`double changeToLocalOrder;`|¶ÔµØÇøÖÈĞò²úÉúµÄĞ§¹û|
-|`double changeToMedicalInput;`|¶ÔµØÇø¿ªÒ©Á¿µÄÓ°Ïì|
-|`bool changeToBorder;`|¶ÔµØÇø±ß¾³µÄĞ§¹û|
-|`double cond_localInfectedRatio;`|¿ªÕş²ßÊ±µÄ±¾µØ¸ĞÈ¾±ÈÀı×îĞ¡Öµ|
-|`double cond_localDeadRatio;`|¿ªÕş²ßÊ±µÄ±¾µØËÀÍö±ÈÀı×îĞ¡Öµ|
-|`double cond_localAttention;`|¿ªÕş²ßÊ±µÄ±¾µØ¹Ø×¢×îĞ¡Öµ|
-|`double cond_worldInfectedRatio;`|¿ªÕş²ßÊ±µÄÊÀ½ç¸ĞÈ¾±ÈÀı×îĞ¡Öµ|
-|`double cond_worldDeadRatio;`|¿ªÕş²ßÊ±µÄÊÀ½çËÀÍö±ÈÀı×îĞ¡Öµ|
-|`double cond_worldAttention;`|¿ªÕş²ßÊ±µÄÊÀ½ç¹Ø×¢×îĞ¡Öµ|
-|`void Execute(CCountry& country) const`|Ö´ĞĞÕâ¸öÕş²ß|
-|`bool CanExecute(CWorld& world, CCountry& country) const`|Õâ¸öÕş²ßÊÇ·ñ¿ÉÒÔÖ´ĞĞ|
+|`std::string name;`|æ”¿ç­–çš„åç§°|
+|`double changeToLocalInfectivity;`|å¯¹ä¼ æŸ“äº§ç”Ÿçš„æ•ˆæœ|
+|`double changeToLocalSeverity;`|å¯¹ä¸¥é‡äº§ç”Ÿçš„æ•ˆæœ|
+|`double changeToLocalLethality;`|å¯¹è‡´æ­»äº§ç”Ÿçš„æ•ˆæœ|
+|`double changeToLocalCorpseTransmission;`|å¯¹å°¸ä½“ä¼ æ’­äº§ç”Ÿçš„æ•ˆæœ|
+|`double changeToLocalOrder;`|å¯¹åœ°åŒºç§©åºäº§ç”Ÿçš„æ•ˆæœ|
+|`double changeToMedicalInput;`|å¯¹åœ°åŒºå¼€è¯é‡çš„å½±å“|
+|`bool changeToBorder;`|å¯¹åœ°åŒºè¾¹å¢ƒçš„æ•ˆæœ|
+|`double cond_localInfectedRatio;`|å¼€æ”¿ç­–æ—¶çš„æœ¬åœ°æ„ŸæŸ“æ¯”ä¾‹æœ€å°å€¼|
+|`double cond_localDeadRatio;`|å¼€æ”¿ç­–æ—¶çš„æœ¬åœ°æ­»äº¡æ¯”ä¾‹æœ€å°å€¼|
+|`double cond_localAttention;`|å¼€æ”¿ç­–æ—¶çš„æœ¬åœ°å…³æ³¨æœ€å°å€¼|
+|`double cond_worldInfectedRatio;`|å¼€æ”¿ç­–æ—¶çš„ä¸–ç•Œæ„ŸæŸ“æ¯”ä¾‹æœ€å°å€¼|
+|`double cond_worldDeadRatio;`|å¼€æ”¿ç­–æ—¶çš„ä¸–ç•Œæ­»äº¡æ¯”ä¾‹æœ€å°å€¼|
+|`double cond_worldAttention;`|å¼€æ”¿ç­–æ—¶çš„ä¸–ç•Œå…³æ³¨æœ€å°å€¼|
+|`void Execute(CCountry& country) const`|æ‰§è¡Œè¿™ä¸ªæ”¿ç­–|
+|`bool CanExecute(CWorld& world, CCountry& country) const`|è¿™ä¸ªæ”¿ç­–æ˜¯å¦å¯ä»¥æ‰§è¡Œ|
 
 #### `class CCountry`
-Õâ¸öÀà±íÊ¾µÄÊÇµØÇø¡£
+è¿™ä¸ªç±»è¡¨ç¤ºçš„æ˜¯åœ°åŒºã€‚
 
-¿ÉÒÔÖ±½Ó·ÃÎÊµÄ±äÁ¿ºÍ·½·¨ÈçÏÂ£º
+å¯ä»¥ç›´æ¥è®¿é—®çš„å˜é‡å’Œæ–¹æ³•å¦‚ä¸‹ï¼š
 
-|Ãû³Æ|ËµÃ÷|
+|åç§°|è¯´æ˜|
 |----|----|
-|`std::string name;`|µØÇøµÄÃû³Æ|
-|`long originalPopulation;`|µØÇøµÄ×ÜÈË¿Ú|
-|`long healthyPopulation;`|µØÇøµÄ½¡¿µÈË¿ÚÊıÁ¿|
-|`long infectedPopulation;`|µØÇøµÄ¸ĞÈ¾ÈË¿ÚÊıÁ¿|
-|`long deadPopulation;`|µØÇøËÀÕßÊıÁ¿|
-|`double infectedRatio;`|¸ĞÈ¾±ÈÀı|
-|`double deadRatio;`|ËÀÍö±ÈÀı|
-|`double realAreaAttention;`|µØÇøÕæÊµ¹Ø×¢|
-|`double areaOrder`|µØÇøÖÈĞò|
-|`double researchInvestment`|µØÇø½âÒ©ÑĞ·¢Í¶Èë|
-|`double researchInvestmentTotal`|µØÇø½âÒ©ÑĞ·¢Í¶Èë»ù´¡Öµ|
-|`double areaImportance;`|µØÇøÈ¨ÖØ|
-|`bool isWealthy;`|ÊÇ²»ÊÇ¸»Ô£¹ú¼Ò|
-|`bool isPoverty;`|ÊÇ²»ÊÇÆ¶À§¹ú¼Ò|
-|`bool isUrban;`|ÊÇ²»ÊÇ³ÇÊĞ¹ú¼Ò|
-|`bool isRural;`|ÊÇ²»ÊÇÏç´å¹ú¼Ò|
-|`bool isHot;`|ÊÇ²»ÊÇÑ×ÈÈ¹ú¼Ò|
-|`bool isCold;`|ÊÇ²»ÊÇº®Àä¹ú¼Ò|
-|`bool isHumid;`|ÊÇ²»ÊÇ³±ÊªµØÇø|
-|`bool isArid;`|ÊÇ²»ÊÇ¸ÉÔïµØÇø|
-|`bool isBorderOpen;`|±ß¾³ÊÇ·ñ¿ª·Å|
-|`double changeToLocalInfectivity = 0;`|Õş²ßµ¼ÖÂµÄµØÇø´«È¾ĞÔ±ä¶¯|
-|`double changeToLocalSeverity = 0;`|Õş²ßµ¼ÖÂµÄµØÇøÑÏÖØĞÔ±ä¶¯|
-|`double changeToLocalLethality = 0;`|Õş²ßµ¼ÖÂµÄµØÇøËÀÍöÂÊ±ä¶¯|
-|`double changeToLocalCorpseTransmission = 0;`|Õş²ßµ¼ÖÂµÄµØÇøÊ¬´«±ä¶¯|
-|`double changeToLocalOrder = 0;`|Õş²ßµ¼ÖÂµÄµØÇøÖÈĞò±ä¶¯|
-|`std::set<std::string> policyExecuted;`|ÔÚ¸ÃµØÇø´¥·¢¹ıµÄÕş²ßÃû³Æ¼¯ºÏ|
-|`void Update(CWorld& world, const CDisease& disease)`|¸üĞÂ¹ú¼ÒÊı¾İ£¬**Ö»ÓÃÓÚ`CWorld::Update`**ÇëÎğÖØ¸´µ÷ÓÃ|
+|`std::string name;`|åœ°åŒºçš„åç§°|
+|`long originalPopulation;`|åœ°åŒºçš„æ€»äººå£|
+|`long healthyPopulation;`|åœ°åŒºçš„å¥åº·äººå£æ•°é‡|
+|`long infectedPopulation;`|åœ°åŒºçš„æ„ŸæŸ“äººå£æ•°é‡|
+|`long deadPopulation;`|åœ°åŒºæ­»è€…æ•°é‡|
+|`double infectedRatio;`|æ„ŸæŸ“æ¯”ä¾‹|
+|`double deadRatio;`|æ­»äº¡æ¯”ä¾‹|
+|`double realAreaAttention;`|åœ°åŒºçœŸå®å…³æ³¨|
+|`double areaOrder`|åœ°åŒºç§©åº|
+|`double researchInvestment`|åœ°åŒºè§£è¯ç ”å‘æŠ•å…¥|
+|`double researchInvestmentTotal`|åœ°åŒºè§£è¯ç ”å‘æŠ•å…¥åŸºç¡€å€¼|
+|`double areaImportance;`|åœ°åŒºæƒé‡|
+|`bool isWealthy;`|æ˜¯ä¸æ˜¯å¯Œè£•å›½å®¶|
+|`bool isPoverty;`|æ˜¯ä¸æ˜¯è´«å›°å›½å®¶|
+|`bool isUrban;`|æ˜¯ä¸æ˜¯åŸå¸‚å›½å®¶|
+|`bool isRural;`|æ˜¯ä¸æ˜¯ä¹¡æ‘å›½å®¶|
+|`bool isHot;`|æ˜¯ä¸æ˜¯ç‚çƒ­å›½å®¶|
+|`bool isCold;`|æ˜¯ä¸æ˜¯å¯’å†·å›½å®¶|
+|`bool isHumid;`|æ˜¯ä¸æ˜¯æ½®æ¹¿åœ°åŒº|
+|`bool isArid;`|æ˜¯ä¸æ˜¯å¹²ç‡¥åœ°åŒº|
+|`bool isBorderOpen;`|è¾¹å¢ƒæ˜¯å¦å¼€æ”¾|
+|`double changeToLocalInfectivity = 0;`|æ”¿ç­–å¯¼è‡´çš„åœ°åŒºä¼ æŸ“æ€§å˜åŠ¨|
+|`double changeToLocalSeverity = 0;`|æ”¿ç­–å¯¼è‡´çš„åœ°åŒºä¸¥é‡æ€§å˜åŠ¨|
+|`double changeToLocalLethality = 0;`|æ”¿ç­–å¯¼è‡´çš„åœ°åŒºæ­»äº¡ç‡å˜åŠ¨|
+|`double changeToLocalCorpseTransmission = 0;`|æ”¿ç­–å¯¼è‡´çš„åœ°åŒºå°¸ä¼ å˜åŠ¨|
+|`double changeToLocalOrder = 0;`|æ”¿ç­–å¯¼è‡´çš„åœ°åŒºç§©åºå˜åŠ¨|
+|`std::set<std::string> policyExecuted;`|åœ¨è¯¥åœ°åŒºè§¦å‘è¿‡çš„æ”¿ç­–åç§°é›†åˆ|
+|`void Update(CWorld& world, const CDisease& disease)`|æ›´æ–°å›½å®¶æ•°æ®ï¼Œ**åªç”¨äº`CWorld::Update`**|
 
-### ³õÊ¼»¯Êı¾İ
-±¾³ÌĞòÍ·µÄÊı¾İ³õÊ¼»¯²»ÒÀÀµÓÚÍâ²¿¿â¡£ÄãĞèÒªÔÚÊ¹ÓÃ¸Ã³ÌĞòÍ·µÄ¿ÉÖ´ĞĞÎÄ¼şÍ¬Ä¿Â¼ÏÂ£¬ĞÂ½¨Ò»¸ö`source`ÎÄ¼ş¼Ğ¡£
+### åˆå§‹åŒ–æ•°æ®
+æœ¬ç¨‹åºå¤´çš„æ•°æ®åˆå§‹åŒ–ä¸ä¾èµ–äºå¤–éƒ¨åº“ã€‚ä½ éœ€è¦åœ¨ä½¿ç”¨è¯¥ç¨‹åºå¤´çš„å¯æ‰§è¡Œæ–‡ä»¶åŒç›®å½•ä¸‹ï¼Œæ–°å»ºä¸€ä¸ª`source`æ–‡ä»¶å¤¹ã€‚
 
-ÔÚ¸ÃÎÄ¼ş¼ĞÏÂ£¬ÄãĞèÒª´´½¨Èı¸ö `UTF-8` ±àÂëµÄ´¿ÎÄ±¾ÎÄ¼ş `countryInfo.txt` `diseaseInfo.txt` `policyInfo.txt` ¡£
+åœ¨è¯¥æ–‡ä»¶å¤¹ä¸‹ï¼Œä½ **å¿…é¡»**åˆ›å»ºä¸‰ä¸ª `UTF-8` ç¼–ç çš„çº¯æ–‡æœ¬æ–‡ä»¶ `countryInfo.txt` `diseaseInfo.txt` `policyInfo.txt` ã€‚å¦åˆ™ç¨‹åºå°†ä¼š**ä¸èƒ½æ‰§è¡Œ**ã€‚
 
-ÔÚ `countryInfo.txt` ÖĞ£¬ÄãÓ¦¸Ã½«Í¬Ò»¸öµØÇøµÄÄÚÈİÑÏ¸ñµØ°´ÕÕÏÂÃæ´úÂëÖĞÊı×é `ci[12]` ¸ø³öµÄË³Ğò£¬ÓÃ°ë½Ç¶ººÅ·Ö¸î£¬Ğ´ÔÚÍ¬Ò»ĞĞÄÚ£»µ±Ğ´ÏÂÒ»¸öµØÇøµÄÊ±ºò£¬ÄãĞèÒª»»ĞĞ¡£³ıÁËÃû³ÆÒÔÍâ£¬ÄãÔÚÃ¿Ò»¸ö×Ö¶Î¶¼±ØĞëÊ¹ÓÃ´¿Êı×Ö£¬Èç `114` £¬»òÕß `5.14` ¡£²¼¶ûĞÍ±äÁ¿ÔòÓÃ0»ò1¼´¿É¡£
+*åœ¨20240508ç‰ˆæœ¬çš„å¤´æ–‡ä»¶ä¸­ï¼Œæˆ‘ä»¬å·²ç»ä¸ºä½ æå‰åˆ›å»ºå¥½äº†è¿™å‡ ä¸ªæ–‡ä»¶ã€‚ä½ éœ€è¦åšçš„äº‹æƒ…å·²ç»å˜ä¸ºï¼ŒæŒ‰ç…§ä¸‹é¢çš„éœ€æ±‚æ­£ç¡®å¡«å†™ä¸Šè¿°æ•°æ®æ–‡ä»¶ã€‚*
+
+åœ¨ `countryInfo.txt` ä¸­ï¼Œä½ åº”è¯¥å°†åŒä¸€ä¸ªåœ°åŒºçš„å†…å®¹ä¸¥æ ¼åœ°æŒ‰ç…§ä¸‹é¢ä»£ç ä¸­æ•°ç»„ `ci[12]` ç»™å‡ºçš„é¡ºåºï¼Œç”¨åŠè§’é€—å·åˆ†å‰²ï¼Œå†™åœ¨åŒä¸€è¡Œå†…ï¼›å½“å†™ä¸‹ä¸€ä¸ªåœ°åŒºçš„æ—¶å€™ï¼Œä½ éœ€è¦æ¢è¡Œã€‚é™¤äº†åç§°ä»¥å¤–ï¼Œä½ åœ¨æ¯ä¸€ä¸ªå­—æ®µéƒ½å¿…é¡»ä½¿ç”¨çº¯æ•°å­—ï¼Œå¦‚ `114` ï¼Œæˆ–è€… `5.14` ã€‚å¸ƒå°”å‹å˜é‡åˆ™ç”¨0æˆ–1å³å¯ã€‚
 
 ``` C++
 c.name = ci[0];
@@ -174,7 +196,7 @@ c.isUrban = static_cast<bool>(std::stoi(ci[10]));
 c.isWealthy = static_cast<bool>(std::stoi(ci[11]));
 ```
 
-ÔÚ `diseaseInfo.txt` ÖĞ£¬ÄãÓ¦¸Ã½«¼²²¡µÄÊôĞÔÑÏ¸ñµØ°´ÕÕÏÂÃæÊı×é `di[15]` µÄË³Ğò£¬ÓÃ°ë½Ç¶ººÅ·Ö¸î£¬Ğ´ÔÚÍ¬Ò»ĞĞÄÚ¡£³ıÁËÃû³ÆÒÔÍâ£¬ÄãÔÚÃ¿Ò»¸ö×Ö¶Î¶¼±ØĞëÊ¹ÓÃ´¿Êı×Ö£¬Èç `114` £¬»òÕß `5.14` ¡£
+åœ¨ `diseaseInfo.txt` ä¸­ï¼Œä½ åº”è¯¥å°†ç–¾ç—…çš„å±æ€§ä¸¥æ ¼åœ°æŒ‰ç…§ä¸‹é¢æ•°ç»„ `di[15]` çš„é¡ºåºï¼Œç”¨åŠè§’é€—å·åˆ†å‰²ï¼Œå†™åœ¨åŒä¸€è¡Œå†…ã€‚é™¤äº†åç§°ä»¥å¤–ï¼Œä½ åœ¨æ¯ä¸€ä¸ªå­—æ®µéƒ½å¿…é¡»ä½¿ç”¨çº¯æ•°å­—ï¼Œå¦‚ `114` ï¼Œæˆ–è€… `5.14` ã€‚
 
 ```C++
 name = di[0];
@@ -194,7 +216,7 @@ cureRequirement = 1e6 * std::stod(di[13]);
 landTransmission = std::stod(di[14]);
 ```
 
-ÔÚ `policyInfo.txt` ÖĞ£¬ÄãÓ¦¸Ã½«Í¬Ò»¸öµØÇøµÄÄÚÈİÑÏ¸ñµØ°´ÕÕÏÂÃæ´úÂëÖĞÊı×é `pi[14]` ¸ø³öµÄË³Ğò£¬ÓÃ°ë½Ç¶ººÅ·Ö¸î£¬Ğ´ÔÚÍ¬Ò»ĞĞÄÚ£»µ±Ğ´ÏÂÒ»¸öÕş²ßµÄÊ±ºò£¬ÄãĞèÒª»»ĞĞ¡£³ıÁËÃû³ÆÒÔÍâ£¬ÄãÔÚÃ¿Ò»¸ö×Ö¶Î¶¼±ØĞëÊ¹ÓÃ´¿Êı×Ö£¬Èç `114` £¬»òÕß `5.14` ¡£
+åœ¨ `policyInfo.txt` ä¸­ï¼Œä½ åº”è¯¥å°†åŒä¸€ä¸ªåœ°åŒºçš„å†…å®¹ä¸¥æ ¼åœ°æŒ‰ç…§ä¸‹é¢ä»£ç ä¸­æ•°ç»„ `pi[14]` ç»™å‡ºçš„é¡ºåºï¼Œç”¨åŠè§’é€—å·åˆ†å‰²ï¼Œå†™åœ¨åŒä¸€è¡Œå†…ï¼›å½“å†™ä¸‹ä¸€ä¸ªæ”¿ç­–çš„æ—¶å€™ï¼Œä½ éœ€è¦æ¢è¡Œã€‚é™¤äº†åç§°ä»¥å¤–ï¼Œä½ åœ¨æ¯ä¸€ä¸ªå­—æ®µéƒ½å¿…é¡»ä½¿ç”¨çº¯æ•°å­—ï¼Œå¦‚ `114` ï¼Œæˆ–è€… `5.14` ã€‚
 
 ```C++
 p.name = pi[0];
@@ -213,4 +235,18 @@ p.changeToMedicalInput = std::stod(pi[12]);
 p.changeToBorder = std::stod(pi[13]);
 ```
 
-×¢Òâ£¬²»ÒªĞ´ÈÎºÎ±íÍ·¡£ÈÎºÎ¶àÓàµÄ×Ö·û¾ùÓĞ¿ÉÄÜµ¼ÖÂ¶ÁÈëµÄÊ§°Ü¡£
+æ³¨æ„ï¼Œä¸è¦å†™ä»»ä½•è¡¨å¤´ã€‚ä»»ä½•å¤šä½™çš„å­—ç¬¦å‡æœ‰å¯èƒ½å¯¼è‡´è¯»å…¥çš„å¤±è´¥ã€‚
+
+### å…¶ä»–å®ç”¨æ–¹æ³•
+é‰´äºC#çš„é«˜æ–¹ä¾¿åº¦ï¼Œæˆ‘æœ¬æ¥æ˜¯æƒ³å¼•å…¥ä¸€äº›C#æ–¹æ³•å’Œåº“æ¥ç®€åŒ–æˆ‘çš„å·¥ä½œçš„ã€‚ç„¶è€Œï¼Œé‰´äºC++/CLIæˆ‘è€æ˜¯è°ƒæ•™å¤±è´¥ï¼Œäºæ˜¯ç ´ç½ç ´æ‘”ï¼Œæ”¹ç”¨çº¯C++æ¥å®ç°ã€‚
+
+ä»¥ä¸‹å®ç”¨æ–¹æ³•å…¨éƒ¨å®šä¹‰äº `csfunc.cpp` æ–‡ä»¶å†…ï¼Œåœ¨ `Ethene` å‘½åç©ºé—´ä¸­ã€‚å½“ç„¶ï¼Œä½ åœ¨ç¼–è¯‘çš„æ—¶å€™å¿…é¡»æŠŠå®ƒåŠ å…¥ç¼–è¯‘ï¼Œå› ä¸ºæˆ‘åœ¨å…¶ä»–æ–¹æ³•çš„å®šä¹‰ä¸­ç¡®å®æ˜¯ç”¨åˆ°äº†è¿™äº›æ–¹æ³•ï¼Œè¦ä¸ç„¶ä½ ææ€•éœ€è¦é¢å¯¹ `C2027` å’Œ/æˆ– `LNK2001` ã€‚
+
+
+|åç§°|è¯´æ˜|
+|----|----|
+|`int GetRandomNumber(const int &lowerLimit, const int &upperLimit);`	|åœ¨æŒ‡å®šèŒƒå›´å†…ï¼Œè·å–ä¸€ä¸ªéšæœºæ•°|
+|`bool IsInset(const std::set<std::string> &mySet, const std::string &str);`|è·å–æŸå…ƒç´ æ˜¯å¦å­˜åœ¨äºæŸé›†åˆ|
+|`std::string ReadAllText(const std::string &path);`|è¯»å…¥å…¨éƒ¨å†…å®¹åˆ°å­—ç¬¦ä¸²|
+|`std::vector<std::string> ReadAllLines(const std::string &path);`|è¯»å…¥å…¨éƒ¨è¡Œåˆ°å­—ç¬¦ä¸²æ•°ç»„ï¼Œæ•°ç»„çš„æ¯ä¸€ä¸ªå…ƒç´ éƒ½æ˜¯æ–‡ä»¶çš„ä¸€è¡Œ|
+|`std::vector<std::string> Split(const std::string &str, char delimiter);`|æŒ‰ç…§ç»™å®šçš„å­—ç¬¦å­ä¸²åˆ†å‰²å­—ç¬¦ä¸²|	

@@ -13,23 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CCountry.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="CDisease.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="CPolicy.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="CWorld.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="PlagueSimulatorLib.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
+    <Filter Include="资源文件\source">
+      <UniqueIdentifier>{488f77a9-17a2-430c-ac93-12b0f7326d80}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="API.md">
@@ -38,5 +24,38 @@
     <None Include="README.md">
       <Filter>资源文件</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PlagueSimulatorLib.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CCountry.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CDisease.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CPolicy.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="csfunc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CWorld.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="source\countryInfo.txt">
+      <Filter>资源文件\source</Filter>
+    </Text>
+    <Text Include="source\diseaseInfo.txt">
+      <Filter>资源文件\source</Filter>
+    </Text>
+    <Text Include="source\policyInfo.txt">
+      <Filter>资源文件\source</Filter>
+    </Text>
   </ItemGroup>
 </Project>
