@@ -30,6 +30,10 @@ namespace Ethene
 
 	std::ostream& operator<<(std::ostream& out, const CCountry& country);
 
+	std::ostream& operator<<(std::ostream& out, const CDisease& disease);
+
+	std::ostream& operator<<(std::ostream& out, const CWorld& world);
+
 	class CCountry
 	{
 	private:
