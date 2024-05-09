@@ -1,5 +1,7 @@
 # Plague Simulator 代码参考资料
 后端作者：乙烯
+C++ ver: `/std:c++20` 以上
+C ver: `/std:c17` 以上
 
 ## 使用说明
 首先必须说明的一点是：下列所有类和实用方法均在命名空间`Ethene`内。
@@ -9,7 +11,7 @@
 *`#region` 预编译头是一个简单的折叠器，你当然可以不写，反正也没什么影响*
 
 ```C++
-#pragma region 
+#pragma region Static Variables Initialization
 std::vector<Ethene::CCountry> Ethene::CWorld::countries = {};
 std::vector<Ethene::CPolicy> Ethene::CWorld::policiesAll = {};
 Ethene::CDisease Ethene::CDisease::disease = *new Ethene::CDisease();
@@ -42,7 +44,8 @@ Ethene::CWorld Ethene::CWorld::world = *new Ethene::CWorld();
 
 int main()
 {
-	Ethene::CWorld world = Ethene::CWorld::GetWorld();
+	Ethene::CWorld& world = Ethene::CWorld::GetWorld();
+	Ethene::CDisease& disease = Ethene::CDisease::GetDisease();
 	world.Initialize();
 	std::cout << world.originalPopulation<<std::endl;
 	return 0;
@@ -53,6 +56,7 @@ int main()
 以下将会分块阐释上述类的使用方式。
 
 *注意：在高版本C++编译器中，`cpp` 的 `#pragma once` 可能会爆黄，不过应该是不会影响运行。*
+**非常建议**使用 `#pragma once` 来防止头文件多次编译。~~~才不是因为作者懒导致的（~~~
 
 #### `class CWorld`
 这个类表示的是世界相关的变量和方法。
@@ -250,3 +254,4 @@ p.changeToBorder = std::stod(pi[13]);
 |`std::string ReadAllText(const std::string &path);`|读入全部内容到字符串|
 |`std::vector<std::string> ReadAllLines(const std::string &path);`|读入全部行到字符串数组，数组的每一个元素都是文件的一行|
 |`std::vector<std::string> Split(const std::string &str, char delimiter);`|按照给定的字符子串分割字符串|	
+|`std::ostream& operator<<(std::ostream& out, const CCountry& country);`|把一个国家的名称、健康人数、感染人数、死者数量输出到终端上|

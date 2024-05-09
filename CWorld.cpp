@@ -36,9 +36,9 @@ namespace Ethene
 			IP += country.infectedPopulation;
 			DP += country.deadPopulation;
 		}
-		healthyPopulation = HP;
-		infectedPopulation = IP;
-		deadPopulation = DP;
+		world.healthyPopulation = HP;
+		world.infectedPopulation = IP;
+		world.deadPopulation = DP;
 	}
 	void CWorld::GetPopulationRatios()
 	{
@@ -66,6 +66,7 @@ namespace Ethene
 			c.isRural = static_cast<bool>(std::stoi(ci[9]));
 			c.isUrban = static_cast<bool>(std::stoi(ci[10]));
 			c.isWealthy = static_cast<bool>(std::stoi(ci[11]));
+			c.originalDensity = static_cast<double>(std::stod(ci[12]));
 			c.policyExecuted.clear();
 
 			c.healthyPopulation = c.originalPopulation;
@@ -110,7 +111,6 @@ namespace Ethene
 	{
 		countries.clear();
 		policiesAll.clear();
-		CDisease::GetDisease().Initialize();
 		InitializeCountries();
 		InitializePolicies();
 		GetOriginalPopulation();
@@ -125,7 +125,7 @@ namespace Ethene
 	}
 	void CWorld::Update(const CDisease &disease)
 	{
-		for (CCountry &country : world.countries)
+		for (CCountry& country : world.countries)
 		{
 			country.Update(world, disease);
 		}

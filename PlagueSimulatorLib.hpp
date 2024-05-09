@@ -1,18 +1,15 @@
 #pragma once
-#include <iostream>
-#include <cstdio>
-#include <vector>
-#include <numeric>
-#include <map>
-#include <set>
-#include <random>
 #include <cmath>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <string>
 #include <cstdio>
+#include <fstream>
+#include <iostream>
+#include <map>
+#include <numeric>
+#include <random>
+#include <set>
+#include <sstream>
+#include <string>
+#include <vector>
 
 namespace Ethene
 {
@@ -21,35 +18,37 @@ namespace Ethene
 	class CPolicy;
 	class CWorld;
 
-	int GetRandomNumber(const int &lowerLimit, const int &upperLimit);
+	int GetRandomNumber(const int& lowerLimit, const int& upperLimit);
 
-	bool IsInset(const std::set<std::string> &mySet, const std::string &str);
+	bool IsInset(const std::set<std::string>& mySet, const std::string& str);
 
-	std::string ReadAllText(const std::string &path);
+	std::string ReadAllText(const std::string& path);
 
-	std::vector<std::string> ReadAllLines(const std::string &path);
+	std::vector<std::string> ReadAllLines(const std::string& path);
 
-	std::vector<std::string> Split(const std::string &str, char delimiter);
+	std::vector<std::string> Split(const std::string& str, char delimiter);
+
+	std::ostream& operator<<(std::ostream& out, const CCountry& country);
 
 	class CCountry
 	{
 	private:
-		double originalDensity;
+
 		double subjectiveWorldAttention = 0;
-		CCountry &GetThis();
+		CCountry& GetThis();
 		double GetCurrentDensity() const;
-		double GetCurrentDensity(const CDisease &disease) const;
-		double GetLocalResistance(const CDisease &disease) const;
-		double GetCurrentLocalRealInfectivity(const CDisease &disease) const;
+		double GetCurrentDensity(const CDisease& disease) const;
+		double GetLocalResistance(const CDisease& disease) const;
+		double GetCurrentLocalRealInfectivity(const CDisease& disease) const;
 		long GetCurrentPopulation() const;
-		double GetCurrentAreaAttention(CWorld &world, const CDisease &disease);
-		double GetCurrentAreaOrder(const CDisease &disease) const;
-		long AddInfected(const CDisease &disease);
-		long AddDeath(const CDisease &disease);
-		double GetCurrentRealMedicalInput(const CDisease &disease) const;
-		double GetCurrentSubjectiveWorldAttention(const CWorld &world);
-		void CrossBorder(CWorld &world, const CDisease &disease) const;
-		void ExecutePolicies(CWorld &world);
+		double GetCurrentAreaAttention(CWorld& world, const CDisease& disease);
+		double GetCurrentAreaOrder(const CDisease& disease) const;
+		long AddInfected(const CDisease& disease, const int& rr);
+		long AddDeath(const CDisease& disease);
+		double GetCurrentRealMedicalInput(const CDisease& disease) const;
+		double GetCurrentSubjectiveWorldAttention(const CWorld& world);
+		void CrossBorder(CWorld& world, const CDisease& disease) const;
+		void ExecutePolicies(CWorld& world);
 		void GetCurrentInvestment();
 
 	public:
@@ -65,6 +64,7 @@ namespace Ethene
 		double researchInvestment = 0;
 		double researchInvestmentTotal;
 		double areaImportance;
+		double originalDensity;
 		bool isWealthy;
 		bool isPoverty;
 		bool isUrban;
@@ -81,7 +81,7 @@ namespace Ethene
 		double changeToLocalOrder = 0;
 		double changeToResearchInvestment = 0;
 		std::set<std::string> policyExecuted;
-		void Update(CWorld &world, const CDisease &disease);
+		void Update(CWorld& world, const CDisease& disease);
 	};
 
 	class CDisease
@@ -106,7 +106,7 @@ namespace Ethene
 		double corpseTransmission;
 		double cureRequirement;
 		double landTransmission;
-		static CDisease &GetDisease();
+		static CDisease& GetDisease();
 		void Initialize();
 	};
 
@@ -129,9 +129,9 @@ namespace Ethene
 		double cond_worldDeadRatio;
 		double cond_worldAttention;
 
-		void Execute(CCountry &country) const;
+		void Execute(CCountry& country) const;
 
-		bool CanExecute(CWorld &world, CCountry &country) const;
+		bool CanExecute(CWorld& world, CCountry& country) const;
 	};
 
 	class CWorld
@@ -147,7 +147,7 @@ namespace Ethene
 		void InitializePolicies();
 
 	public:
-		static CWorld &GetWorld();
+		static CWorld& GetWorld();
 		std::string name;
 		static std::vector<CCountry> countries;
 		static std::vector<CPolicy> policiesAll;
@@ -161,6 +161,6 @@ namespace Ethene
 		double infectedRatio;
 		double deadRatio;
 		void Initialize();
-		void Update(const CDisease &disease);
+		void Update(const CDisease& disease);
 	};
 }

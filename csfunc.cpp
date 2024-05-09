@@ -1,5 +1,6 @@
 #pragma once
 #include "PlagueSimulatorLib.hpp"
+#include <format>
 
 namespace Ethene
 {
@@ -51,6 +52,16 @@ namespace Ethene
         }
 
         return result;
+    }
+
+    std::ostream& operator<<(std::ostream& out, const CCountry& country)
+    {
+        std::string strN = std::format("Name:\t{}\n", country.name);
+        std::string strH = std::format("healthyPopulation:\t{}\n", country.healthyPopulation);
+        std::string strI = std::format("infectedPopulation:\t{}\n", country.infectedPopulation);
+        std::string strD = std::format("deadPopulation:\t{}\n", country.deadPopulation);
+        out << strN << strH << strI << strD;
+        return out;
     }
 
     bool IsInset(const std::set<std::string> &mySet, const std::string &str)
