@@ -10,6 +10,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <tuple>
 
 namespace Ethene
 {
@@ -155,6 +156,8 @@ namespace Ethene
 		std::string name;
 		static std::vector<CCountry> countries;
 		static std::vector<CPolicy> policiesAll;
+		static std::vector<std::tuple<long, long, long>> worldHistory;
+		static std::vector<std::tuple<double, double, double>> diseaseHistory;
 		double worldAttention;
 		double worldTotalResearch;
 		double worldKindness;

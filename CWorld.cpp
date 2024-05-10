@@ -111,6 +111,8 @@ namespace Ethene
 	{
 		countries.clear();
 		policiesAll.clear();
+		diseaseHistory.clear();
+		worldHistory.clear();
 		InitializeCountries();
 		InitializePolicies();
 		GetOriginalPopulation();
@@ -132,5 +134,7 @@ namespace Ethene
 		world.GetAllKindsOfPopulation();
 		world.GetPopulationRatios();
 		world.GetWorldAttention();
+		worldHistory.push_back(*new std::tuple<long, long, long>(healthyPopulation, infectedPopulation, deadPopulation));
+		diseaseHistory.push_back(*new std::tuple<double, double, double>(disease.infectivity, disease.severity, disease.lethality));
 	}
 }

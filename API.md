@@ -6,7 +6,7 @@ C ver: `/std:c17` 以上
 ## 使用说明
 首先必须说明的一点是：下列所有类和实用方法均在命名空间`Ethene`内。
 请事先进行`typedef`，或者全程使用双冒号。极不建议使用 `using namespace Ethene` 或者类似的代码，因为Ethene类毕竟是少数。
-同时，你应该将下列五行代码放置在你编程文件 `main` 函数的上方；多文件建议使用 `extern` 关键字，否则你将会被 `LNK2001` 制裁。
+同时，你应该将下列代码放置在你编程文件 `main` 函数的上方；多文件建议使用 `extern` 关键字，否则你将会被 `LNK2001` 制裁。
 
 *`#region` 预编译头是一个简单的折叠器，你当然可以不写，反正也没什么影响*
 
@@ -14,6 +14,8 @@ C ver: `/std:c17` 以上
 #pragma region Static Variables Initialization
 std::vector<Ethene::CCountry> Ethene::CWorld::countries = {};
 std::vector<Ethene::CPolicy> Ethene::CWorld::policiesAll = {};
+std::vector<std::tuple<long, long, long>> Ethene::CWorld::worldHistory = {};
+std::vector<std::tuple<double, double, double>> Ethene::CWorld::diseaseHistory = {};
 Ethene::CDisease Ethene::CDisease::disease = *new Ethene::CDisease();
 Ethene::CWorld Ethene::CWorld::world = *new Ethene::CWorld();
 #pragma endregion
@@ -38,6 +40,8 @@ Ethene::CWorld Ethene::CWorld::world = *new Ethene::CWorld();
 #pragma region 
 std::vector<Ethene::CCountry> Ethene::CWorld::countries = {};
 std::vector<Ethene::CPolicy> Ethene::CWorld::policiesAll = {};
+std::vector<std::tuple<long, long, long>> Ethene::CWorld::worldHistory = {};
+std::vector<std::tuple<double, double, double>> Ethene::CWorld::diseaseHistory = {};
 Ethene::CDisease Ethene::CDisease::disease = *new Ethene::CDisease();
 Ethene::CWorld Ethene::CWorld::world = *new Ethene::CWorld();
 #pragma endregion
@@ -87,6 +91,8 @@ int main()
 | `double deadRatio`|世界的当前死亡比例|
 | `void Initialize()`| 初始化整个世界，会清空所有数据，然后从读取国家开始，重新整个执行一遍|
 | `void Update(const CDisease& disease)` | 更新世界，换句话说，前进一天 |
+| `std::vector<std::tuple<long,long,long>> worldHistory`| 过去的世界历史|
+| `std::vector<std::tuple<double,double,double>> diseaseHistory` | 过去的疾病历史|
 
 #### `class CDisease`
 这个类表示的是疾病相关的实例和方法。

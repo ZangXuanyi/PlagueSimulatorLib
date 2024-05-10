@@ -1,6 +1,4 @@
 // This is an example!
-// 这是设定了两个叫Terra和Moon的无属性国家，人口均有1亿人
-// 暂未考虑解药研发！
 
 #pragma once
 #include "PlagueSimulatorLib.hpp"
@@ -10,6 +8,8 @@
 #pragma region Static Variables Initialization
 std::vector<Ethene::CCountry> Ethene::CWorld::countries = {};
 std::vector<Ethene::CPolicy> Ethene::CWorld::policiesAll = {};
+std::vector<std::tuple<long, long, long>> Ethene::CWorld::worldHistory = {};
+std::vector<std::tuple<double, double, double>> Ethene::CWorld::diseaseHistory = {};
 Ethene::CDisease Ethene::CDisease::disease = *new Ethene::CDisease();
 Ethene::CWorld Ethene::CWorld::world = *new Ethene::CWorld();
 #pragma endregion
